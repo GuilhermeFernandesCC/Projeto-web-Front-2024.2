@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import Caixa from "../components/CaixaLoginCad"
-import ContainerWrapper from "../components/ContainerWrapper";
+import {ContainerLogin,ContainerCadastro} from "../components/ContainerWrapper";
 
 
 export default function Login() {
@@ -10,7 +9,7 @@ export default function Login() {
     
     return (
         <div>
-            <ContainerWrapper imageSrc='src/assets/LuaAzulSemFundo.png'></ContainerWrapper>
+            <ContainerLogin imageSrc='src/assets/LuaAzulSemFundo.png'></ContainerLogin>
         </div>
     );
 }
