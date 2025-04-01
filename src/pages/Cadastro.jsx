@@ -1,5 +1,13 @@
+import React, { useEffect } from "react";
+
 export default function Cadastro() {
-    return <>
-        <h1>Página de Cadastro</h1>  
-    </>
+    useEffect(() => {
+        document.title = "Cadastro"; // Altera o título da página
+        }, []);
+
+    return (
+        <div>
+            <h1>Página de Cadastro</h1>
+        </div>  
+    );
 }

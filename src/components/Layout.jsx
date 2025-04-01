@@ -26,8 +26,8 @@ const styles = {
     position: "absolute",
     bottom: 0,
     left: 0,
-    borderRight: "36vw solid transparent", // Define a base do triângulo
-    borderBottom: "36vh solid #034B97", // Cor do triângulo
+    borderRight: "30vw solid transparent", // Define a base do triângulo
+    borderBottom: "30vh solid #034B97", // Cor do triângulo
   },
 };
 
