@@ -4,33 +4,28 @@ import InputField from "./InputField";
 import TitleContainer from "./TituloLoginCad";
 import BotaoSalvar from "./BotaoSalvar";
 import TextLink from "./TextLink";
+import { loginUser } from "../services/api";
 
 const ContainerLogin = ({ imageSrc, children }) => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");  
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");  
 
     const handleLogin = async (event) => {
         event.preventDefault(); // Impede o recarregamento da página
     
         // Dados do formulário
         const formData = {
-          name,
           email,
+          senha,
         };
     
         try {
           // Enviando os dados para a API usando `fetch`
-          const response = await fetch("https://sua-api.com/endpoint", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
-    
+          const response = await loginUser(email,senha)
+          console.log(response.data)
           // Verifica se a requisição foi bem-sucedida
-          if (response.ok) {
-            const data = await response.json();
+          if (response.data.message == 'Login successful') {
+            const data = response.data;
             localStorage.setItem('token',data.token)
             alert("Login realizado com sucesso!");
             window.location.href = "/dashboard"
@@ -49,8 +44,8 @@ const ContainerLogin = ({ imageSrc, children }) => {
         <Caixa>
             <form onSubmit={handleLogin}>
                 <TitleContainer title="Lunar Maps"></TitleContainer>
-                <InputField onChange={(e) => setName(e.target.value)} label='Email'></InputField>
-                <InputField onChange={(e) => setEmail(e.target.value)} label='Senha'></InputField>
+                <InputField onChange={(e) => setEmail(e.target.value)} label='Email'></InputField>
+                <InputField onChange={(e) => setSenha(e.target.value)} label='Senha'></InputField>
                 <TextLink text='Não tem uma conta?' linkText='Registre-se'></TextLink>
                 <BotaoSalvar type='submit' text='Entrar'></BotaoSalvar>
             </form>
