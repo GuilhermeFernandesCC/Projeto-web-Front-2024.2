@@ -12,7 +12,7 @@ const styles = {
       display:'flex',
       flexDirection:'column',
       width: "35vw", 
-      height: "35vw",
+      height: "35vh",
       backgroundColor: "#fff", // Fundo branco ou outra cor desejada
       padding: "20px",
       borderRadius: "10px", // Bordas arredondadas para um visual moderno
