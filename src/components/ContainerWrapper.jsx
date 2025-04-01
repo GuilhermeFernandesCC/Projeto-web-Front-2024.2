@@ -31,7 +31,9 @@ const ContainerLogin = ({ imageSrc, children }) => {
           // Verifica se a requisição foi bem-sucedida
           if (response.ok) {
             const data = await response.json();
-            alert("Formulário enviado com sucesso!");
+            localStorage.setItem('token',data.token)
+            alert("Login realizado com sucesso!");
+            window.location.href = "/dashboard"
           } else {
             alert("Erro ao enviar o formulário.");
           }
