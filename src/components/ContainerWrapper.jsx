@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Caixa from  "../components/CaixaLoginCad"
 import InputField from "./InputField";
 import TitleContainer from "./TituloLoginCad";
@@ -6,31 +6,108 @@ import BotaoSalvar from "./BotaoSalvar";
 import TextLink from "./TextLink";
 
 const ContainerLogin = ({ imageSrc, children }) => {
-  return (
-    <div style={styles.wrapper}>
-      <img src={imageSrc} alt="Imagem" style={styles.image} />
-      <Caixa>
-        <TitleContainer title="Lunar Maps"></TitleContainer>
-        <InputField label='Email'></InputField>
-        <InputField label='Senha'></InputField>
-        <TextLink text='Não tem uma conta?' linkText='Registre-se'></TextLink>
-        <BotaoSalvar text='Entrar'></BotaoSalvar>
-      </Caixa>
-    </div>
-  );
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");  
+
+    const handleLogin = async (event) => {
+        event.preventDefault(); // Impede o recarregamento da página
+    
+        // Dados do formulário
+        const formData = {
+          name,
+          email,
+        };
+    
+        try {
+          // Enviando os dados para a API usando `fetch`
+          const response = await fetch("https://sua-api.com/endpoint", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+    
+          // Verifica se a requisição foi bem-sucedida
+          if (response.ok) {
+            const data = await response.json();
+            alert("Formulário enviado com sucesso!");
+          } else {
+            alert("Erro ao enviar o formulário.");
+          }
+        } catch (error) {
+          console.error("Erro de rede:", error);
+          alert("Erro de rede ao enviar o formulário.");
+        }
+    };
+
+    return (
+        <div style={styles.wrapper}>
+        <img src={imageSrc} alt="Imagem" style={styles.image} />
+        <Caixa>
+            <form onSubmit={handleLogin}>
+                <TitleContainer title="Lunar Maps"></TitleContainer>
+                <InputField onChange={(e) => setName(e.target.value)} label='Email'></InputField>
+                <InputField onChange={(e) => setEmail(e.target.value)} label='Senha'></InputField>
+                <TextLink text='Não tem uma conta?' linkText='Registre-se'></TextLink>
+                <BotaoSalvar type='submit' text='Entrar'></BotaoSalvar>
+            </form>
+        </Caixa>
+        </div>
+    );
 };
 
 const ContainerCadastro = ({ imageSrc, children }) => {
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const handleCadastro= async (event) => {
+        event.preventDefault(); // Impede o recarregamento da página
+    
+        // Dados do formulário
+        const formData = {
+          name,
+          email,
+          senha
+        };
+    
+        try {
+          // Enviando os dados para a API usando `fetch`
+          const response = await fetch("https://sua-api.com/endpoint", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+    
+          // Verifica se a requisição foi bem-sucedida
+          if (response.ok) {
+            const data = await response.json();
+            alert("Formulário enviado com sucesso!");
+          } else {
+            alert("Erro ao enviar o formulário.");
+          }
+        } catch (error) {
+          console.error("Erro de rede:", error);
+          alert("Erro de rede ao enviar o formulário.");
+        }
+    };
+
+
     return (
       <div style={styles.wrapper}>
         <img src={imageSrc} alt="Imagem" style={styles.image} />
         <Caixa>
-          <TitleContainer title="Lunar Maps Cadastro"></TitleContainer>
-          <InputField label='Nome'></InputField>
-          <InputField label='Email'></InputField>
-          <InputField label='Senha'></InputField>
-          <TextLink text='Não tem uma conta?' linkText='Registre-se'></TextLink>
-          <BotaoSalvar text='Entrar'></BotaoSalvar>
+            <form onSubmit={handleCadastro}>
+                <TitleContainer title="Lunar Maps Cadastro"></TitleContainer>
+                <InputField onChange={(e) => setName(e.target.value)} label='Nome'></InputField>
+                <InputField onChange={(e) => setEmail(e.target.value)} label='Email'></InputField>
+                <InputField onChange={(e) => setSenha(e.target.value)} htmlFor='senha' label='Senha' type='password'></InputField>
+                <TextLink text='Já possui uma conta?' linkText='Faça Login'></TextLink>
+                <BotaoSalvar text='Entrar'></BotaoSalvar>
+            </form>
         </Caixa>
       </div>
     );
