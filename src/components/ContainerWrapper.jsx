@@ -4,7 +4,7 @@ import InputField from "./InputField";
 import TitleContainer from "./TituloLoginCad";
 import BotaoSalvar from "./BotaoSalvar";
 import TextLink from "./TextLink";
-import { loginUser } from "../services/api";
+import { addUserProfile, loginUser } from "../services/api";
 
 const ContainerLogin = ({ imageSrc, children }) => {
     const [email, setEmail] = useState("");
@@ -71,13 +71,7 @@ const ContainerCadastro = ({ imageSrc, children }) => {
     
         try {
           // Enviando os dados para a API usando `fetch`
-          const response = await fetch("https://sua-api.com/endpoint", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
+          const response = await addUserProfile(name,email,senha);
     
           // Verifica se a requisição foi bem-sucedida
           if (response.ok) {

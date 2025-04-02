@@ -10,13 +10,19 @@ export const loginUser = async (email,password) => {
 }
 
 export const getUserProfile = async (token) => {
-    return api.get("user/get", {
+    return api.get("user/getPerfil", {
       headers: { Authorization: `Bearer ${token}` },
     });
 };
 
 export const addUserProfile = async (name,email,senha) => {
     return api.post("user/add"), {
+        name,email,senha
+    }
+}
+
+export const updateUserProfile = async(token,name,email,senha) => {
+    return api.put("user/update"),{
         name,email,senha
     }
 }
