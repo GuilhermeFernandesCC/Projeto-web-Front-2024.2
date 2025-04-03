@@ -16,13 +16,27 @@ export const getUserProfile = async (token) => {
 };
 
 export const addUserProfile = async (name,email,senha) => {
-    return api.post("user/add"), {
+    return api.post("user/add", {
         name,email,senha
-    }
+    })
 }
 
 export const updateUserProfile = async(token,name,email,senha) => {
-    return api.put("user/update"),{
+    return api.put("user/update",{
         name,email,senha
-    }
+    })
+}
+
+export const getTablesAsMaster = async(token) => {
+    const response =  api.get('/user/getTablesAsMaster',{
+        headers: { Authorization: `Bearer ${token}` },
+    })
+    return response
+}
+
+export const getTablesAsPlayer = async(token) => {
+    const responde = api.get('/user/getTablesAsPlayer',{
+        headers: { Authorization: `Bearer ${token}` },
+    })
+    return responde
 }

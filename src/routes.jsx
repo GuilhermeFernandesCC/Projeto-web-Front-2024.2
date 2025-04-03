@@ -9,12 +9,12 @@ export default function AppRoutes() {
   return (
     <Router>
       <Layout>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/mesa" element={<Mesa />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/mesa" element={<Mesa />} />
+        </Routes>
       </Layout>
     </Router>
   );

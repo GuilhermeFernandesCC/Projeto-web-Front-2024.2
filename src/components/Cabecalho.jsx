@@ -22,10 +22,8 @@ const Cabecalho = () => {
         try {
             const response = await getUserProfile(token)
             setUser(response.data)
-            console.log('Data'+response.data)
         } catch (error) {
             setError("Erro de conexão com o servidor.");
-            console.log(error)
             //window.location.href = "/"
         } finally {
             setLoading(false);
@@ -34,8 +32,6 @@ const Cabecalho = () => {
 
         fetchUserData();
     }, []);
-    console.log(loading)
-    console.log("deda"+user)
     return (
         <header style={styles.header}>
         {!loading && user ? <PerfilMin user={user} /> : <p>Carregando...</p>}

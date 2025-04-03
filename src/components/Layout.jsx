@@ -12,12 +12,11 @@ const Layout = ({ children }) => {
 const styles = {
   container: {
     width:'100vw',
-    minHeight: "100vh",
+    height: "100vh",
     backgroundColor:"#292D32",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    position: 'relative',
     margin: 0, // Remove qualquer margem extra
     padding: 0, // Remove qualquer padding extra
     overflow: "hidden", // Evita que algo saia da tela
@@ -28,6 +27,7 @@ const styles = {
     left: 0,
     borderRight: "30vw solid transparent", // Define a base do triângulo
     borderBottom: "30vh solid #034B97", // Cor do triângulo
+    zIndex:0
   },
 };
 

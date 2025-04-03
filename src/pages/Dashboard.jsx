@@ -1,9 +1,9 @@
 import React, { useEffect ,useState} from "react";
 import Cabecalho from "../components/Cabecalho";
-import PerfilMin from "../components/PerfilMin";
+import MesasParticipante from "../components/MesasParticipante";
 
 
-export default function Login() {
+export default function Dashboard() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -12,9 +12,20 @@ export default function Login() {
         document.title = "Dashboard"; // Altera o título da página
     })
     return (
-        <div>
+        <div id="dashboardRoot" style={styles.dashboard}>
             <Cabecalho></Cabecalho>
-            
+            <MesasParticipante></MesasParticipante>
         </div>
     );
+}
+
+const styles={
+    dashboard:{
+        width:'100%',
+        height:'100%',
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        flexDirection:'column'
+    }
 }
