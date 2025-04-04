@@ -53,11 +53,8 @@ const MesasParticipante = () => {
 
         fetchUserData();
     }, []);
-    console.log(tableLoad)
-    console.log(mesasJogador)
-    console.log(mesasMestre)
+
     return (
-        
         <div style={styles.container}>
             {mesasMestre.length > 0 && 
                 (mesasMestre.map((mesa)=>(<MesaBox table={mesa} ></MesaBox>)))
@@ -80,7 +77,7 @@ const styles = {
         borderRadius:"10px",
         justifyContent:'flex-start',
         alignItems:'flex-start',
-        aiignContent:'flex-start',
+        alignContent:'flex-start',
         flexWrap:'wrap',
         gap:'5px',
 

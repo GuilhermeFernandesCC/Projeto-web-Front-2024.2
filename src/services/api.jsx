@@ -1,4 +1,5 @@
 import axios from "axios"
+import { data } from "react-router-dom";
 
 const api = axios.create({
     baseURL: "http://localhost:3000/",
@@ -28,15 +29,27 @@ export const updateUserProfile = async(token,name,email,senha) => {
 }
 
 export const getTablesAsMaster = async(token) => {
-    const response =  api.get('/user/getTablesAsMaster',{
+    const response =  api.get('user/getTablesAsMaster',{
         headers: { Authorization: `Bearer ${token}` },
     })
     return response
 }
 
 export const getTablesAsPlayer = async(token) => {
-    const responde = api.get('/user/getTablesAsPlayer',{
+    const response = api.get('user/getTablesAsPlayer',{
         headers: { Authorization: `Bearer ${token}` },
     })
-    return responde
+    return response
+}
+
+export const createTable = async(token,name) => {
+    const headers = { Authorization: `Bearer ${token}` }
+    console.log(headers)
+    const response = api.post('table/add', { name }, { headers })
+    .catch(function (error) {
+        if (error.response) {
+            return error.response
+        }})
+    console.log(response)
+    return response;
 }
