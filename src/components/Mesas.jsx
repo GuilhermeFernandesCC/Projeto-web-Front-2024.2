@@ -1,10 +1,17 @@
 import BotaoSalvar from "./BotaoSalvar"
+import { useNavigate } from "react-router-dom";
+
 
 const MesaBox = ({table,isMestre=false}) =>{
 
+    const nav = useNavigate();
+
+    const handleClick = () => {
+        nav(`/mesa`, { state: { table} });
+      };
     return (
-        <div id="mesa" style={styles.container}>
-            <img onClick={''} style={styles.img} src = {isMestre ? "src/assets/mapa1.png":"src/assets/mapa2.png"} alt="Imagem mesa" />
+        <div onClick={handleClick} id="mesa" style={styles.container}>
+            <img  style={styles.img} src = {isMestre ? "src/assets/mapa1.png":"src/assets/mapa2.png"} alt="Imagem mesa" />
             <div>
                 <h2 style={styles.tableName}>{table.name}</h2>
             </div>

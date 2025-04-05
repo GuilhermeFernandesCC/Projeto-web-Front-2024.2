@@ -57,10 +57,10 @@ const MesasParticipante = () => {
     return (
         <div style={styles.container}>
             {mesasMestre.length > 0 && 
-                (mesasMestre.map((mesa)=>(<MesaBox table={mesa} ></MesaBox>)))
+                (mesasMestre.map((mesa)=>(<MesaBox table={mesa} key={mesa.id}></MesaBox>)))
             }
             {mesasJogador.length > 0  && 
-                (mesasJogador.map((mesa)=>(<MesaBox table={mesa} isMestre={false}></MesaBox>)))
+                (mesasJogador.map((mesa)=>(<MesaBox table={mesa} key={mesa.id} isMestre={false}></MesaBox>)))
             }
         </div>
     );

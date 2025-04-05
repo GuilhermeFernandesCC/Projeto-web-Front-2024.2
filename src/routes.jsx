@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CoresJogadoresProvider } from "./services/coresjogadores";
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import Mesa from "./pages/Mesa";
@@ -8,6 +9,7 @@ import Dashboard from "./pages/Dashboard"
 export default function AppRoutes() {
   return (
     <Router>
+      <CoresJogadoresProvider>
       <Layout>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -16,6 +18,7 @@ export default function AppRoutes() {
           <Route path="/mesa" element={<Mesa />} />
         </Routes>
       </Layout>
+      </CoresJogadoresProvider>
     </Router>
   );
 }

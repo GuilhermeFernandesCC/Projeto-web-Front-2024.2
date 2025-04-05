@@ -46,10 +46,12 @@ export const createTable = async(token,name) => {
     const headers = { Authorization: `Bearer ${token}` }
     console.log(headers)
     const response = api.post('table/add', { name }, { headers })
-    .catch(function (error) {
-        if (error.response) {
-            return error.response
-        }})
     console.log(response)
+    return response;
+}
+
+export const getJogadores = async(token,tableId) => {
+    const headers = { Authorization: `Bearer ${token}` }
+    const response = api.get('table/getPlayers/'+tableId,{ headers:headers })
     return response;
 }
