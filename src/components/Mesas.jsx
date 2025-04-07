@@ -7,7 +7,7 @@ const MesaBox = ({table,isMestre=false}) =>{
     const nav = useNavigate();
 
     const handleClick = () => {
-        nav(`/mesa`, { state: { table} });
+        nav(`/mesa`, { state: { table,isMestre} });
       };
     return (
         <div onClick={handleClick} id="mesa" style={styles.container}>

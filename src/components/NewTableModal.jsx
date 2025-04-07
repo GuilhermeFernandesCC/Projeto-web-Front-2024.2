@@ -1,13 +1,14 @@
 import React,{useState} from "react"
 import InputField from "./InputField"
 import { createTable } from "../services/api"
-
+import { useNavigate } from "react-router-dom";
 const NewTableModal = ({onClose}) => {
+    const nav = useNavigate();
     const [nome, setNome] = useState("");
     const token = localStorage.getItem("token");
-    const handleSubmit = () => {
-        createTable(token,nome)
-        window.location.href = "/dashboard"
+    const handleSubmit = async () => {
+        await createTable(token,nome);
+        nav('/dashboard')
     };
     return (
         <div style={styles.overlay} onClick={onClose}>

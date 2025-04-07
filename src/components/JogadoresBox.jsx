@@ -1,12 +1,13 @@
 import React, { useEffect,useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getJogadores } from "../services/api";
 import JogadorBox from "./JogadorBox";
 import { useCoresJogadores } from "../services/coresjogadores"
-const JogadoresBox = ({table}) =>{
+const JogadoresBox = ({table,isMestre}) =>{
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const [jogadores,setJogadores] = useState([]);
-    const { getCorJogador } = useCoresJogadores()
+    const nav = useNavigate();
     useEffect(() => {
         const token = localStorage.getItem("token");
         const fetchUserData = async () => { 
@@ -20,17 +21,20 @@ const JogadoresBox = ({table}) =>{
                 if (Array.isArray(response.data)){
                     setJogadores(response.data)}
             } catch (error) {
-                setError("Erro de conexão com o servidor.");
-                //window.location.href = "/"
+                setError("Erro Carregamento do usuáio")
             }
 
             };
 
             fetchUserData();
         }, []);
+        if(error=="Erro Carregamento do usuáio"){
+            
+            nav('/')
+        }
     return (
         <div id="JogadoresBox" style={styles.container}>
-            {jogadores.map((jogador)=>(<JogadorBox key={jogador.id} cor={getCorJogador(jogador.id)} user={jogador}></JogadorBox>))}
+            {jogadores.map((jogador)=>(<JogadorBox isMestre={isMestre} tableId={table.id} key={jogador.id} user={jogador}></JogadorBox>))}
         </div>
     )
 }

@@ -1,14 +1,22 @@
+import React, { useEffect,useState } from "react";
+import ConfigPanel from "./ConfigPanel";
 
-const ReturnVoltarBox = ({user,table}) =>{
-
+const ReturnConfigBox = ({user,table,isMestre}) =>{
+    const [configOpen,setConfigOpen] = useState(false)
+    const handleConfig = () =>{
+        setConfigOpen(true)
+    }
     return(
         <div style={styles.container}>
-            <button onClick={()=>window.location.href = "/dashboard"} id='Return' style={styles.botao} >
+            <button onClick={()=>window.location.href = "/dashboard"} id='ReturnButton' style={styles.botao} >
                 <img src="src/assets/return.svg" style={styles.fig} alt="" />
             </button>
-            <button id='Config' style={styles.botao} >
+            {isMestre && (<button onClick={()=>handleConfig()} id='ConfigButton' style={styles.botao} >
                 <img src="src/assets/config.svg" style={styles.fig} alt="" />
-            </button>
+            </button>)}
+            {configOpen && (
+                <ConfigPanel table={table} onClose={()=> setConfigOpen(false)}></ConfigPanel>
+            )}
         </div>
     )
 }
@@ -39,4 +47,4 @@ const styles ={
     }
 }
 
-export default ReturnVoltarBox
+export default ReturnConfigBox

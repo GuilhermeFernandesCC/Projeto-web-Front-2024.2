@@ -4,20 +4,16 @@ import InputField from "./InputField";
 import TitleContainer from "./TituloLoginCad";
 import BotaoSalvar from "./BotaoSalvar";
 import TextLink from "./TextLink";
+import { useNavigate } from "react-router-dom";
 import { addUserProfile, loginUser } from "../services/api";
 
 const ContainerLogin = ({ imageSrc, children }) => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");  
-
+    const nav = useNavigate();
     const handleLogin = async (event) => {
         event.preventDefault(); // Impede o recarregamento da página
     
-        // Dados do formulário
-        const formData = {
-          email,
-          senha,
-        };
     
         try {
           // Enviando os dados para a API usando `fetch`
@@ -28,7 +24,7 @@ const ContainerLogin = ({ imageSrc, children }) => {
             const data = response.data;
             localStorage.setItem('token',data.token)
             alert("Login realizado com sucesso!");
-            window.location.href = "/dashboard"
+            nav("/dashboard")
           } else {
             alert("Erro ao enviar o formulário.");
           }
@@ -46,7 +42,7 @@ const ContainerLogin = ({ imageSrc, children }) => {
                 <TitleContainer title="Lunar Maps"></TitleContainer>
                 <InputField onChange={(e) => setEmail(e.target.value)} label='Email'></InputField>
                 <InputField onChange={(e) => setSenha(e.target.value)} label='Senha'></InputField>
-                <TextLink text='Não tem uma conta?' linkText='Registre-se'></TextLink>
+                <TextLink text='Não tem uma conta?' linkText='Registre-se' onClick={()=>nav('/cadastro')}></TextLink>
                 <BotaoSalvar type='submit' text='Entrar'></BotaoSalvar>
             </form>
         </Caixa>
@@ -55,7 +51,7 @@ const ContainerLogin = ({ imageSrc, children }) => {
 };
 
 const ContainerCadastro = ({ imageSrc, children }) => {
-
+    const nav = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -63,27 +59,23 @@ const ContainerCadastro = ({ imageSrc, children }) => {
         event.preventDefault(); // Impede o recarregamento da página
     
         // Dados do formulário
-        const formData = {
-          name,
-          email,
-          senha
-        };
     
         try {
           // Enviando os dados para a API usando `fetch`
           const response = await addUserProfile(name,email,senha);
-    
+          console.log(response.data)
           // Verifica se a requisição foi bem-sucedida
-          if (response.ok) {
-            const data = await response.json();
-            alert("Formulário enviado com sucesso!");
+          if (response.status === 200 || response.status === 201) {
+            alert("Cadastro enviado com sucesso!");
+            nav('/')
+
           } else {
-            alert("Erro ao enviar o formulário.");
+            alert("Erro ao enviar o cadastro.");
           }
         } catch (error) {
-          console.error("Erro de rede:", error);
-          alert("Erro de rede ao enviar o formulário.");
-        }
+          alert("Erro de rede:", error);
+          nav('/cadastro')
+        } 
     };
 
 
@@ -96,9 +88,9 @@ const ContainerCadastro = ({ imageSrc, children }) => {
                 <InputField onChange={(e) => setName(e.target.value)} label='Nome'></InputField>
                 <InputField onChange={(e) => setEmail(e.target.value)} label='Email'></InputField>
                 <InputField onChange={(e) => setSenha(e.target.value)} htmlFor='senha' label='Senha' type='password'></InputField>
-                <TextLink text='Já possui uma conta?' linkText='Faça Login'></TextLink>
-                <BotaoSalvar text='Entrar'></BotaoSalvar>
+                <BotaoSalvar type='submit' text='Cadastrar'></BotaoSalvar>
             </form>
+            <TextLink text='Já possui uma conta?' linkText='Faça Login' onClick={()=>nav('/')}></TextLink>
         </Caixa>
       </div>
     );

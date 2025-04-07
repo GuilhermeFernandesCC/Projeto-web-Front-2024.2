@@ -25,7 +25,7 @@ const Cabecalho = () => {
                 setUser(response.data)
             } catch (error) {
                 setError("Erro de conexão com o servidor.");
-                //window.location.href = "/"
+                
             } finally {
                 setLoading(false);
             }
@@ -33,6 +33,10 @@ const Cabecalho = () => {
 
         fetchUserData();
     }, []);
+
+    if(error=="Erro de conexão com o servidor."){
+        window.location.href = "/"
+    }
     return (
         <header style={styles.header}>
         {!loading && user ? <PerfilMin user={user} /> : <p>Carregando...</p>}
