@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { getTablesAsMaster, getTablesAsPlayer } from "../services/api";
-import MesaBox from "./Mesas";
+import MesaBox from "./MesaBox";
 
 const MesasParticipante = () => {
     const [user, setUser] = useState(null);

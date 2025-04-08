@@ -41,7 +41,7 @@ const ContainerLogin = ({ imageSrc, children }) => {
             <form onSubmit={handleLogin}>
                 <TitleContainer title="Lunar Maps"></TitleContainer>
                 <InputField onChange={(e) => setEmail(e.target.value)} label='Email'></InputField>
-                <InputField onChange={(e) => setSenha(e.target.value)} label='Senha'></InputField>
+                <InputField onChange={(e) => setSenha(e.target.value)} label='Senha' type='password'></InputField>
                 <TextLink text='Não tem uma conta?' linkText='Registre-se' onClick={()=>nav('/cadastro')}></TextLink>
                 <BotaoSalvar type='submit' text='Entrar'></BotaoSalvar>
             </form>
